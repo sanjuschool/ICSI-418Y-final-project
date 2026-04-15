@@ -8,12 +8,12 @@ export default function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-   
+    // For now, any login attempt will work
     console.log("Logging in:", username);
     navigate('/map'); 
   };
-//
-  
+
+  // Ensure this return is INSIDE the Login function braces
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-100">
       <form onSubmit={handleLogin} className="bg-white p-8 rounded-3xl shadow-xl border border-slate-200 w-96">
@@ -40,4 +40,4 @@ export default function Login() {
       </form>
     </div>
   );
-} 
+} // <--- Make sure this closing brace is at the very end of the file
