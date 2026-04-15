@@ -1,29 +1,31 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-export default function Login() {
-  const [username, setUsername] = useState('');
+export default function Signup() {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
-    console.log("Logging in:", username);
+    console.log("Account created for:", email);
     
     navigate('/map'); 
   };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-100">
-      <form onSubmit={handleLogin} className="bg-white p-8 rounded-3xl shadow-xl border border-slate-200 w-96">
-        <h2 className="text-2xl font-bold mb-6 text-slate-900">Sign In</h2>
+      <form onSubmit={handleSignup} className="bg-white p-8 rounded-3xl shadow-xl border border-slate-200 w-96">
+        <h2 className="text-2xl font-bold mb-2 text-slate-900">Create Account</h2>
+        <p className="text-sm text-slate-500 mb-6">Join the campus community</p>
+        
         <div className="space-y-4">
           <input 
-            type="text" 
-            placeholder="Username" 
+            type="email" 
+            placeholder="Email Address" 
             className="w-full p-3 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-slate-400"
-            onChange={(e) => setUsername(e.target.value)} 
-            value={username}
+            onChange={(e) => setEmail(e.target.value)} 
+            value={email}
             required
           />
           <input 
@@ -35,12 +37,13 @@ export default function Login() {
             required
           />
           <button type="submit" className="w-full bg-slate-900 text-white py-3 rounded-xl font-semibold hover:bg-slate-800 transition-colors">
-            Login
+            Sign Up
           </button>
         </div>
+
         <p className="mt-6 text-center text-sm text-slate-600">
-          Don't have an account?{" "}
-          <Link to="/signup" className="text-slate-900 font-bold hover:underline">Sign Up</Link>
+          Already have an account?{" "}
+          <Link to="/" className="text-slate-900 font-bold hover:underline">Log In</Link>
         </p>
       </form>
     </div>
