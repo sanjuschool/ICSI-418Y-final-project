@@ -7,10 +7,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Default route shows Login */}
+       
         <Route path="/" element={<Login />} />
         
-        {/* Success route shows Map */}
+        
         <Route path="/map" element={<CampusMapSimpleUI />} />
       </Routes>
     </Router>
