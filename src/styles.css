@@ -2,6 +2,13 @@
 :root {
   --ualbany-purple: #46166b;
   --ualbany-gold: #eeb211;
+  --white: #ffffff;
+
+}
+
+body{
+    background-color: #ecf0f4;
+     font-family: 'Times New Roman', Times, serif;   
 }
 
 
@@ -14,10 +21,23 @@ form {
 h2 {
     text-align: center;
     margin-bottom: 1.5rem;
+    color: var(--ualbany-purple);
 }
 
 button {
     cursor: pointer;
     display: block;
     margin: 0 auto;
+
+    background-color: var(--ualbany-purple);
+    color: var(--white);
+    border: 2px solid var(--ualbany-gold);
+    padding:10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+button:hover{
+    background-color: var(--ualbany-gold);
+    color: var(--ualbany-purple);
 }
