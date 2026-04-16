@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from 'axios';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log("Logging in:", username);
-    navigate('/map'); 
+  const handleLogin = (event) => {
+    event.preventDefault(); // Stops page refresh
+    
+    axios.get('http://localhost:9000/getUser', { params: { username, password }})
+      .then((res) => {
+        if (res.data) {
+          alert('Login Successful');
+          // navigate('/home'); // You can navigate to a home page here
+        } else {
+          alert('Wrong Credentials');
+        }
+      })
+      .catch((err) => alert('Error in Login'));
   };
 
   return (

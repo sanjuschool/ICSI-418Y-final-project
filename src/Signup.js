@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from 'axios'; // Fixes 'axios' is not defined
 
 export default function Signup() {
-  const [email, setEmail] = useState('');
+  // Changed 'email' to 'username' to fix 'username' is not defined in the handleSignup function
+  const [username, setUsername] = useState(''); 
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSignup = (e) => {
-    e.preventDefault();
-    console.log("Account created for:", email);
-    navigate('/map'); 
+  // Renamed to 'handleSignup' to match the form onSubmit call
+  const handleSignup = (event) => {
+    event.preventDefault(); // Stops page refresh
+    
+    axios.post('http://localhost:9000/createUser', { username, password })
+      .then((res) => {
+        alert('Signup Successful!');
+        navigate('/'); // Redirect to login
+      })
+      .catch((err) => {
+        alert('Error: ' + (err.response?.data || 'Server Error'));
+      });
   };
 
   return (
@@ -20,11 +30,11 @@ export default function Signup() {
         
         <div className="space-y-4 w-full">
           <input 
-            type="email" 
-            placeholder="Email Address" 
+            type="text" 
+            placeholder="Username" 
             className="w-full p-4 rounded-xl border border-slate-200 bg-slate-50 outline-none focus:ring-2 focus:ring-[#eeb211] transition-all"
-            onChange={(e) => setEmail(e.target.value)} 
-            value={email}
+            onChange={(e) => setUsername(e.target.value)} 
+            value={username}
             required
           />
           <input 
