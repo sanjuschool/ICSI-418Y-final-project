@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
+import Styles from './styles.css';
 import CampusMapSimpleUI from './CampusMapSimpleUI';
 
 function App() {
