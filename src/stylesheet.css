@@ -1,0 +1,54 @@
+input[type="text"] {
+    position: absolute;
+    top: 20%;
+    width: 20%;
+    margin: 8px 0;
+    padding: 10px;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+.app {
+  position: relative;
+  min-height: 100vh;
+}
+
+.menu-btn {
+  margin: 20px;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  color: white;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}

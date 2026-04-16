@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import './stylesheet.css'; // Import the custom CSS for styling
 
 export default function CampusMapSimpleUI() {
   // Replace these with your campus center coordinates later
   const campusCenter = [42.6867, -73.8238];
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
 
   return (
     <div className="min-h-screen bg-slate-100 p-6">
@@ -38,7 +41,10 @@ export default function CampusMapSimpleUI() {
               </p>
             </div>
           </aside>
-
+          <input
+            type = "text"
+            placeholder = "Search locations..."
+          />
           <main className="p-4">
             <div className="overflow-hidden rounded-2xl border border-slate-200">
               <MapContainer
@@ -54,6 +60,30 @@ export default function CampusMapSimpleUI() {
               </MapContainer>
             </div>
           </main>
+              <div className="app">
+           
+                
+      <button onClick={() => setIsSidebarOpen(true)} className="menu-btn">
+        Open Sidebar
+      </button>
+
+      {isSidebarOpen && (
+        <div
+          className="backdrop"
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
+
+      <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+        <button
+          className="close-btn"
+          onClick={() => setIsSidebarOpen(false)}
+        >
+        </button>
+        <h2>Menu</h2>
+      </div>
+
+      </div>
         </div>
       </div>
     </div>

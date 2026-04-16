@@ -1,7 +1,10 @@
 import CampusMapSimpleUI from './CampusMapSimpleUI';
 
 function App() {
-  return <CampusMapSimpleUI />;
+  return (
+  <CampusMapSimpleUI />
+
+);
 }
 
 export default App;
