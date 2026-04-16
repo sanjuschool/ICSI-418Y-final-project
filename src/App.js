@@ -4,17 +4,14 @@ import Login from './Login';
 import CampusMapSimpleUI from './CampusMapSimpleUI';
 
 function App() {
- return (
-    <Router>
-      <Routes>
-        
-        <Route path="/" element={<Login />} />
-        
-        
-        <Route path="/map" element={<CampusMapSimpleUI />} />
-      </Routes>
-    </Router>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/map" element={<CampusMapSimpleUI />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
