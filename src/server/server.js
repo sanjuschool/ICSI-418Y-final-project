@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const User = require('./UserSchema');
+const Location = require('./LocationSchema');
 
 const app = express();
 app.use(express.json());
@@ -63,9 +65,35 @@ app.get('/getUser', async (req, res) => {
 })
 
 
+app.post('/createLocation', async (req, res) => {
+    console.log(`SERVER: CREATE LOCATION REQ BODY: ${req.body.name} ${req.body.category}`)
+    try {
+        const location = new Location(req.body);
+        await location.save();
+        console.log(`Location created! ${location}`)
+        res.status(201).send(location);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+})
+
+app.get('/getLocations', async (req, res) => {
+    try {
+        const locations = await Location.find();
+        res.send(locations);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+})
+
+
 app.listen(9000, () => {
     console.log(`Server Started at ${9000}`)
 });
+
+
+
+
 
 
 
