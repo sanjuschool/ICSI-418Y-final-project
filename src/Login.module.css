@@ -1,0 +1,94 @@
+:root {
+  --ualbany-purple: #46166b;
+  --ualbany-gold: #eeb211;
+}
+
+.page {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  /* Changed background to UAlbany Purple */
+  background-color: var(--ualbany-purple); 
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.form {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-sizing: border-box;
+  /* Added padding and border to make the form pop against the purple background */
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 16px;
+}
+
+.title {
+  color: var(--ualbany-gold); /* Changed to Gold for better contrast on purple */
+  font-weight: 900;
+  font-size: 1.8rem;
+  margin: 0 0 28px;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.formContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.row {
+  display: flex;
+  flex-direction: column; /* Changed to column for better mobile responsiveness */
+  gap: 12px;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid var(--ualbany-gold);
+  background-color: white; /* White background for inputs */
+  border-radius: 12px;
+  outline: none;
+  box-sizing: border-box;
+  color: #333; /* Dark text for contrast */
+  font-size: 14px;
+}
+
+.button {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--ualbany-gold);
+  color: var(--ualbany-purple);
+  border-radius: 12px;
+  font-weight: 900;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  margin-top: 10px;
+}
+
+.button:hover {
+  background-color: white;
+}
+
+.footerText {
+  margin-top: 22px;
+  color: white;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.link {
+  color: var(--ualbany-gold);
+  font-weight: 700;
+  text-decoration: none;
+}

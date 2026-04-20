@@ -1,0 +1,103 @@
+.page {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: #46166b; /* UAlbany Purple */
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(238, 178, 17, 0.3);
+}
+
+.title {
+  color: #eeb211; /* UAlbany Gold */
+  font-weight: 900;
+  font-size: 2.2rem;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  color: white;
+  text-align: center;
+  margin-bottom: 28px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.formContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #eeb211;
+  background-color: white;
+  border-radius: 8px;
+  outline: none;
+  box-sizing: border-box;
+  color: #46166b;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  box-shadow: 0 0 10px rgba(238, 178, 17, 0.5);
+}
+
+.button {
+  width: 100%;
+  padding: 15px;
+  background-color: #eeb211;
+  color: #46166b;
+  border-radius: 8px;
+  font-weight: 900;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  transition: transform 0.2s, background-color 0.2s;
+  margin-top: 10px;
+}
+
+.button:hover {
+  background-color: white;
+  transform: translateY(-2px);
+}
+
+.footerText {
+  margin-top: 22px;
+  color: white;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.link {
+  color: #eeb211;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
