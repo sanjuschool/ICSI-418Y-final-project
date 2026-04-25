@@ -15,35 +15,30 @@ const database = mongoose.connection
 database.on('error', (error) => console.log(error))
 database.once('connected', () => console.log('Database Connected'))
 
-const userSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String,
-    username: String,
-    password: String,
-    role: String
-});
 
-const User = mongoose.model('User', userSchema, 'Users');
 
 app.post('/createUser', async (req, res) => {
-    console.log(`SERVER: CREATE USER REQ BODY: ${req.body.username} ${req.body.firstName} ${req.body.lastName}`)
-    const un = req.body.username
+    console.log(`SERVER: CREATE USER REQ BODY: ${req.body.username}`);
+
     try {
-        User.exists({username: un}).then(result => {
-            if(Object.is(result, null)) {
-                const user = new User(req.body);
-                user.save()
-                console.log(`User created! ${user}`)
-                res.send(user)
-            } else {
-                console.log("Username already exists")
-                res.status(500).send("Username already exists")
-            }
-        })
+        const existingUser = await User.findOne({ username: req.body.username });
+
+        if (existingUser) {
+            console.log("Username already exists");
+            return res.status(400).send("Username already exists");
+        }
+
+        const user = new User(req.body);
+        await user.save();
+
+        console.log(`User created! ${user}`);
+        res.status(201).send(user);
+
     } catch (error) {
-        res.status(500).send(error)
+        console.log(error);
+        res.status(500).send(error);
     }
-})
+});
 
 app.get('/getUser', async (req, res) => {
     const username = req.query.username

@@ -5,8 +5,10 @@ const userSchema = new mongoose.Schema({
     lastname: { type: String },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    history: { type: [String] },
-    favorites: { type: [String] },
+
+    history: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Location' }],
+    favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Location' }],
+
     role: { type: String },
     createdAt: { type: Date, default: Date.now }
 });
