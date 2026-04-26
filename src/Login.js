@@ -14,7 +14,8 @@ export default function Login() {
       .then((res) => {
         if (res.data) {
           alert('Login Successful');
-          // navigate('/home'); // You can navigate to a home page here
+          localStorage.setItem("user", JSON.stringify(res.data));
+          navigate('/map');
         } else {
           alert('Wrong Credentials');
         }

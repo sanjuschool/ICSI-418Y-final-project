@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     history: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Location' }],
     favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Location' }],
 
-    role: { type: String },
+    role: { type: String, default: "user" },
     createdAt: { type: Date, default: Date.now }
 });
 

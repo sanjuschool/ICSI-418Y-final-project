@@ -17,29 +17,48 @@ database.once('connected', () => console.log('Database Connected'))
 
 
 
-app.post('/createUser', async (req, res) => {
-    console.log(`SERVER: CREATE USER REQ BODY: ${req.body.username}`);
+app.post('/createLocation', async (req, res) => {
+    console.log("CREATE LOCATION BODY:", req.body);
 
     try {
-        const existingUser = await User.findOne({ username: req.body.username });
+        const finalLat = Number(req.body.coordinates.lat);
+        const finalLong = Number(req.body.coordinates.long);
 
-        if (existingUser) {
-            console.log("Username already exists");
-            return res.status(400).send("Username already exists");
+        const existingLocation = await Location.findOne({
+            "coordinates.lat": finalLat,
+            "coordinates.long": finalLong
+        });
+
+        if (existingLocation) {
+            return res.status(400).send("A location with these coordinates already exists.");
         }
 
-        const user = new User(req.body);
-        await user.save();
+        const user = await User.findOne({ username: req.body.createdBy });
 
-        console.log(`User created! ${user}`);
-        res.status(201).send(user);
+        const status = user && user.role === "admin" ? "approved" : "pending";
+
+        const location = new Location({
+            name: req.body.name,
+            category: req.body.category,
+            description: req.body.description,
+            createdBy: req.body.createdBy,
+            coordinates: {
+                lat: finalLat,
+                long: finalLong
+            },
+            status: status
+        });
+
+        await location.save();
+
+        console.log("Location created:", location);
+        res.status(201).send(location);
 
     } catch (error) {
-        console.log(error);
-        res.status(500).send(error);
+        console.log("CREATE LOCATION ERROR:", error);
+        res.status(500).send(error.message);
     }
 });
-
 app.get('/getUser', async (req, res) => {
     const username = req.query.username
     const password = req.query.password
@@ -60,26 +79,15 @@ app.get('/getUser', async (req, res) => {
 })
 
 
-app.post('/createLocation', async (req, res) => {
-    console.log(`SERVER: CREATE LOCATION REQ BODY: ${req.body.name} ${req.body.category}`)
-    try {
-        const location = new Location(req.body);
-        await location.save();
-        console.log(`Location created! ${location}`)
-        res.status(201).send(location);
-    } catch (error) {
-        res.status(500).send(error);
-    }
-})
 
 app.get('/getLocations', async (req, res) => {
     try {
-        const locations = await Location.find();
+        const locations = await Location.find({ status: "approved" });
         res.send(locations);
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send(error.message);
     }
-})
+});
 
 
 app.listen(9000, () => {

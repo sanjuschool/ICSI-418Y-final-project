@@ -5,18 +5,26 @@ const locationSchema = new mongoose.Schema({
     category: { type: String },
     description: { type: String },
     createdBy: { type: String },
+
     coordinates: {
         long: { type: Number, required: true },
         lat: { type: Number, required: true }
     },
+
+    status: {
+        type: String,
+        enum: ["pending", "approved", "declined"], // ✅ ENUMS
+        default: "pending" // ✅ default for new submissions
+    },
+
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });
 
-// Auto-update the updatedAt field when the document changes
-locationSchema.pre('save', function(next) {
+// Auto-update updatedAt
+// Auto-update updatedAt
+locationSchema.pre('save', function() {
     this.updatedAt = Date.now();
-    next();
 });
 
 module.exports = mongoose.model('Location', locationSchema, 'Locations');
