@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './Login';
 import Signup from './Signup';
 import './styles.css';
-import CampusMapSimpleUI from './CampusMapSimpleUI';
+
+import CampusMapPage from "./CampusMapPage";
 
 function App() {
     return (
@@ -11,7 +12,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/map" element={<CampusMapSimpleUI />} />
+                <Route path="/map" element={<CampusMapPage />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </Router>
