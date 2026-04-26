@@ -79,6 +79,67 @@ app.get('/getUser', async (req, res) => {
 })
 
 
+app.get('/getLocationsByCategory', async (req, res) => {
+    const category = req.query.category;
+
+    try {
+        const locations = await Location.find({
+            category: category,
+            status: "approved"
+        });
+
+        res.send(locations);
+
+    } catch (error) {
+        console.log("GET LOCATIONS BY CATEGORY ERROR:", error);
+        res.status(500).send(error.message);
+    }
+});
+
+app.get('/getPendingLocations', async (req, res) => {
+    try {
+        const pendingLocations = await Location.find({
+            status: "pending"
+        });
+        console.log(pendingLocations);
+
+        res.send(pendingLocations);
+
+    } catch (error) {
+        console.log("GET PENDING LOCATIONS ERROR:", error);
+        res.status(500).send(error.message);
+    }
+});
+
+app.patch('/updateLocationStatus/:id', async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    try {
+        // Optional: validate status
+        if (!["pending", "approved", "declined"].includes(status)) {
+            return res.status(400).send("Invalid status");
+        }
+
+        const updatedLocation = await Location.findByIdAndUpdate(
+            id,
+            { status: status },
+            { new: true }
+        );
+
+        if (!updatedLocation) {
+            return res.status(404).send("Location not found");
+        }
+
+        res.send(updatedLocation);
+
+    } catch (error) {
+        console.log("UPDATE LOCATION STATUS ERROR:", error);
+        res.status(500).send(error.message);
+    }
+});
+
+
 
 app.get('/getLocations', async (req, res) => {
     try {
