@@ -3,25 +3,33 @@ import axios from 'axios';
 import CategoryItem from './CategoryItem';
 import { CATEGORIES } from '../../utils/mapHelpers';
 
-export default function CategoryList({ onLocate, onNavigate }) {
-    const [expandedCategory, setExpandedCategory]   = useState(null);
+export default function CategoryList({ onLocate, onNavigate, icons = {} }) {
+    const [expandedCategory, setExpandedCategory] = useState(null);
     const [categoryLocations, setCategoryLocations] = useState({});
-    const [categoryLoading, setCategoryLoading]     = useState({});
+    const [categoryLoading, setCategoryLoading] = useState({});
 
     async function toggleCategory(cat) {
-        if (expandedCategory === cat) { setExpandedCategory(null); return; }
+        if (expandedCategory === cat) {
+            setExpandedCategory(null);
+            return;
+        }
+
         setExpandedCategory(cat);
+
         if (categoryLocations[cat] !== undefined) return;
 
         setCategoryLoading(prev => ({ ...prev, [cat]: true }));
+
         try {
             const res = await axios.get(
                 `http://localhost:9000/getLocationsByCategory?category=${encodeURIComponent(cat)}`
             );
+
             setCategoryLocations(prev => ({ ...prev, [cat]: res.data }));
         } catch {
             setCategoryLocations(prev => ({ ...prev, [cat]: [] }));
         }
+
         setCategoryLoading(prev => ({ ...prev, [cat]: false }));
     }
 
@@ -30,9 +38,10 @@ export default function CategoryList({ onLocate, onNavigate }) {
             {CATEGORIES.map(cat => (
                 <div key={cat} className="category-group">
                     <button
-                        className={`category-header-btn ${expandedCategory === cat ? 'expanded' : ''}`}
+                        className={`sidebar-item category-header-btn ${expandedCategory === cat ? 'expanded' : ''}`}
                         onClick={() => toggleCategory(cat)}
                     >
+                        {icons[cat]}
                         <span className="category-header-name">{cat}</span>
                         <span className="category-chevron">
                             {expandedCategory === cat ? '▲' : '▼'}

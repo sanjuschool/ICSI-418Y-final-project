@@ -259,13 +259,7 @@ export default function CampusMapPage() {
                 />
             )}
 
-            {/* ── Logout ── */}
-            <button
-                className="logout-btn"
-                onClick={() => { localStorage.removeItem('user'); window.location.href = '/'; }}
-            >
-                Logout
-            </button>
+
 
             {/* ── Sidebar ── */}
             <Sidebar
